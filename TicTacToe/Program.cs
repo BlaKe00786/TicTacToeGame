@@ -6,7 +6,7 @@ namespace TicTacToe
     {
         static void Main(string[] args)
         {
-            char[] board = new char[10]; ;
+            char[] board = new char[10];
             board = initialBoard();
         }
         public static char[] initialBoard()
