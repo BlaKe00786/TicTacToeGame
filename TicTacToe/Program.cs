@@ -18,6 +18,16 @@ namespace TicTacToe
             {
                 compLetter = 'X';
             }
+            showBoard(board);
+        }
+        public static void showBoard(char[] board)
+        {
+            Console.WriteLine(board[1]+" | "+ board[2]+" | "+ board[3]);
+            Console.WriteLine("-----------");
+            Console.WriteLine(board[4] + " | " + board[5] + " | " + board[6]);
+            Console.WriteLine("-----------");
+            Console.WriteLine(board[7] + " | " + board[8] + " | " + board[9]);
+
         }
         public static char[] initialBoard()
         {
@@ -30,14 +40,15 @@ namespace TicTacToe
         }
         public static char chooseUserLetter()
         {
-            string userLetter;
+            char userLetter;
             while(true)
             {
                 Console.WriteLine("Choose your Letter (X or O) : ");
-                userLetter = Console.ReadLine();
-                if (userLetter[0].Equals('X') || userLetter[0].Equals('O'))
+                userLetter = Console.ReadLine()[0];
+                userLetter = char.ToUpper(userLetter);
+                if (userLetter.Equals('X') || userLetter.Equals('O'))
                 {
-                    return userLetter[0];
+                    return userLetter;
                 }
                 else
                 {
