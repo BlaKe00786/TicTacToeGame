@@ -9,7 +9,32 @@ namespace TicTacToe
             board = initialBoard();
             char userLetter = chooseUserLetter();
             char compLetter=CompLetter(userLetter);
+            int index = UserMove(board);
+            board[index] = userLetter;
             showBoard(board);
+        }
+        public static int UserMove(char[] board)
+        {
+            while(true)
+            {
+                Console.WriteLine("Enter Your Move (1-9): ");
+                int index = Convert.ToInt32(Console.ReadLine());
+                if (index < 1 || index > 9)
+                {
+                    Console.WriteLine("ENter Valid input");
+                }
+                else
+                {
+                    if(board[index].Equals(' '))
+                    {
+                        return index;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Index not free");
+                    }
+                }
+            }
         }
         public static char CompLetter(char userLetter)
         {
