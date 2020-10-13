@@ -3,16 +3,34 @@ namespace TicTacToe
 {
     class TicTacToeGame
     {
+        private const int HEADS = 1;
+        private const int TAILS = 0;
         static void Main(string[] args)
         {
             char[] board = new char[10];
             board = initialBoard();
             char userLetter = chooseUserLetter();
             char compLetter=CompLetter(userLetter);
-            board = UserMove(board,userLetter);
+            char Player1=toss(userLetter, compLetter);
+            board = makeMove(board,Player1);
             showBoard(board);
         }
-        public static char[] UserMove(char[] board,char userLetter)
+        public static char toss(char userLetter,char compLetter)
+        {
+            Random random = new Random();
+            int toss = random.Next(0, 2);
+            if(toss == HEADS)
+            {
+                Console.WriteLine("Heads. User goes first.");
+                return userLetter;
+            }
+            else
+            {
+                Console.WriteLine("Tails. Computer goes first.");
+                return compLetter;
+            }
+        }
+        public static char[] makeMove(char[] board,char Letter)
         {
             while(true)
             {
@@ -26,7 +44,7 @@ namespace TicTacToe
                 {
                     if(board[index].Equals(' '))
                     {
-                        board[index] = userLetter;
+                        board[index] = Letter;
                         return board;
                     }
                     else
