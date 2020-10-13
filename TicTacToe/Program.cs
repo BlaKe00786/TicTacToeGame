@@ -1,5 +1,4 @@
 ﻿using System;
-
 namespace TicTacToe
 {
     class TicTacToeGame
@@ -9,16 +8,19 @@ namespace TicTacToe
             char[] board = new char[10];
             board = initialBoard();
             char userLetter = chooseUserLetter();
-            char compLetter;
-            if(userLetter.Equals('X'))
+            char compLetter=CompLetter(userLetter);
+            showBoard(board);
+        }
+        public static char CompLetter(char userLetter)
+        {
+            if (userLetter.Equals('X'))
             {
-                compLetter = 'O';
+                return 'O';
             }
             else
             {
-                compLetter = 'X';
+                return 'X';
             }
-            showBoard(board);
         }
         public static void showBoard(char[] board)
         {
@@ -27,7 +29,6 @@ namespace TicTacToe
             Console.WriteLine(board[4] + " | " + board[5] + " | " + board[6]);
             Console.WriteLine("-----------");
             Console.WriteLine(board[7] + " | " + board[8] + " | " + board[9]);
-
         }
         public static char[] initialBoard()
         {
