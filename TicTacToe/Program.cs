@@ -13,10 +13,18 @@ namespace TicTacToe
             char Player1=toss(userLetter, compLetter);
             showBoard(board);
             board = makeMove(board,Player1);
-            int computerMove = makeComputerMove(board, compLetter);
+            int computerMove = getComputerMove(board, compLetter,userLetter);
             Console.WriteLine("Check If Won " + isWinner(board, userLetter));
         }
-        private static int makeComputerMove(char[] board, char computerLetter)
+        private static int getComputerMove(char[] board, char computerLetter, char userLetter)
+        {
+            int winningMove = getWinningMove(board, computerLetter);
+            if (winningMove != 0) return winningMove;
+            int userWinningMove = getWinningMove(board, userLetter);
+            if (userWinningMove != 0) return userWinningMove;
+            return 0;
+        }
+        private static int getWinningMove(char[] board,char letter)
         {
             for (int index=1;index<board.Length;index++)
             {
@@ -24,8 +32,8 @@ namespace TicTacToe
                 System.Array.Copy(board, 0, copyOfBoard, 0, board.Length);
                 if(copyOfBoard[index].Equals(' '))
                 {
-                    copyOfBoard[index] = computerLetter;
-                    if (isWinner(copyOfBoard, computerLetter))
+                    copyOfBoard[index] = letter;
+                    if (isWinner(copyOfBoard, letter))
                         return index;
                 }
             }
