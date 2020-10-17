@@ -13,7 +13,23 @@ namespace TicTacToe
             char Player1=toss(userLetter, compLetter);
             showBoard(board);
             board = makeMove(board,Player1);
+            int computerMove = makeComputerMove(board, compLetter);
             Console.WriteLine("Check If Won " + isWinner(board, userLetter));
+        }
+        private static int makeComputerMove(char[] board, char computerLetter)
+        {
+            for (int index=1;index<board.Length;index++)
+            {
+                char[] copyOfBoard = new char[10];
+                System.Array.Copy(board, 0, copyOfBoard, 0, board.Length);
+                if(copyOfBoard[index].Equals(' '))
+                {
+                    copyOfBoard[index] = computerLetter;
+                    if (isWinner(copyOfBoard, computerLetter))
+                        return index;
+                }
+            }
+            return 0;
         }
         private static bool isWinner(char[] board, char ch)
         {
