@@ -25,6 +25,10 @@ namespace TicTacToe
             int[] cornorMoves = { 1, 3, 7, 9 };
             int computerMove = getRandomMoveFromList(board, cornorMoves);
             if (computerMove != 0) return computerMove;
+            if (board[5].Equals(' ')) return 5;
+            int[] sideMoves = { 2, 4, 6, 8 };
+            computerMove = getRandomMoveFromList(board, sideMoves);
+            if (computerMove != 0) return computerMove;
             return 0;
         }
         private static int getRandomMoveFromList(char[] board, int[] moves)
