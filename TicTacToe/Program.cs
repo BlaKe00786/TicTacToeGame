@@ -22,6 +22,17 @@ namespace TicTacToe
             if (winningMove != 0) return winningMove;
             int userWinningMove = getWinningMove(board, userLetter);
             if (userWinningMove != 0) return userWinningMove;
+            int[] cornorMoves = { 1, 3, 7, 9 };
+            int computerMove = getRandomMoveFromList(board, cornorMoves);
+            if (computerMove != 0) return computerMove;
+            return 0;
+        }
+        private static int getRandomMoveFromList(char[] board, int[] moves)
+        {
+            for (int index = 0; index < moves.Length; index++)
+            {
+                if (board[index].Equals(' ')) return moves[index];
+            }
             return 0;
         }
         private static int getWinningMove(char[] board,char letter)
