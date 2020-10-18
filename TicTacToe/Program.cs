@@ -7,33 +7,43 @@ namespace TicTacToe
         public enum GameStatus { WON, FULL_BOARD, CONTINUE};
         static void Main(string[] args)
         {
-            char[] board = new char[10];
-            board = initialBoard();
-            char userLetter = chooseUserLetter();
-            char compLetter = CompLetter(userLetter);
-            char Player1 = toss(userLetter, compLetter);
-            bool gameIsPlaying = true;
-            GameStatus gameStatus;
-            while (gameIsPlaying)
+            do
             {
-                if (Player1.Equals(userLetter))
+                char[] board = new char[10];
+                board = initialBoard();
+                char userLetter = chooseUserLetter();
+                char compLetter = CompLetter(userLetter);
+                char Player1 = toss(userLetter, compLetter);
+                bool gameIsPlaying = true;
+                GameStatus gameStatus;
+                while (gameIsPlaying)
                 {
-                    showBoard(board);
-                    int userMove = makeMove(board, userLetter);
-                    String wonMessage = "You Won The Game!";
-                    gameStatus = getGameStatus(board, userMove, userLetter, wonMessage);
-                    Player1 = compLetter;
+                    if (Player1.Equals(userLetter))
+                    {
+                        showBoard(board);
+                        int userMove = makeMove(board, userLetter);
+                        String wonMessage = "You Won The Game!";
+                        gameStatus = getGameStatus(board, userMove, userLetter, wonMessage);
+                        Player1 = compLetter;
+                    }
+                    else
+                    {
+                        String wonMessage = "The computer has beaten you! You LOSE";
+                        int computerMove = getComputerMove(board, compLetter, userLetter);
+                        gameStatus = getGameStatus(board, computerMove, compLetter, wonMessage);
+                        Player1 = userLetter;
+                    }
+                    if (gameStatus.Equals(GameStatus.CONTINUE)) continue;
+                    gameIsPlaying = false;
                 }
-                else
-                {
-                    String wonMessage = "The computer has beaten you! You LOSE";
-                    int computerMove = getComputerMove(board, compLetter, userLetter);
-                    gameStatus = getGameStatus(board, computerMove, compLetter, wonMessage);
-                    Player1 = userLetter;
-                }
-                if (gameStatus.Equals(GameStatus.CONTINUE)) continue;
-                gameIsPlaying = false;
-            }
+            } while (playAgain());
+        }
+        private static bool playAgain()
+        {
+            Console.WriteLine("Do you want to play again?(yes/no): ");
+            string option = Console.ReadLine().ToLower();
+            if (option.Equals("yes")) return true;
+            return false;
         }
         private static GameStatus getGameStatus(char[] board, int move, char letter,string wonMessage)
         {
